@@ -90,7 +90,7 @@ class Selenium:
         crx_list = glob("./extensions/*.crx")
         for crx in crx_list:
             options.add_extension(crx)
-        driver = webdriver.Chrome(executable_path="chromedriver", options=options)
+        driver = webdriver.Chrome(executable_path=f"{os.getcwd()}/chromedriver", options=options)
         # stealth(driver,
         #         user_agent=Selenium.USER_AGENT,
         #         # languages=["ru-RU", "ru"],
