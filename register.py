@@ -88,8 +88,7 @@ class SMSHub:
             return False
 
 
-def main(locker):
-    locker.acquire()
+def main():
     d = Driver("selenium")
     d.get("https://google.com/")
     time.sleep(1)
@@ -98,8 +97,6 @@ def main(locker):
     lastname = "Юхранов"
     username = "mrx.mamed17"
     password = "DFc45#EDF"
-
-    locker.release()
 
     move = d.driver.find_element_by_xpath("//*[text()='Войти']")
     click = ActionChains(d.driver).move_to_element(move).perform()
@@ -139,16 +136,17 @@ def main(locker):
     time.sleep(1)
     pyautogui.typewrite(password, interval=0.1)
     pyautogui.press("enter")
-    time.sleep(5)
-    pyautogui.press("tab")
-    pyautogui.press("tab")
-    pyautogui.press("tab")
-    pyautogui.press("tab")
-    time.sleep(1)
+    time.sleep(random.randint(7, 14))
+
     if d.v_check("//*[contains(text(),'SMS')]", timeout=30):
         print("Check 1 success!")
         print(SMSHub.get_number(), SMSHub.current_id, SMSHub.current_number)
-        pyautogui.typewrite(SMSHub.current_number.replace("7", "", 1), interval=0.1)
+        pyautogui.press("tab")
+        pyautogui.press("tab")
+        pyautogui.press("tab")
+        pyautogui.press("tab")
+        time.sleep(1)
+        pyautogui.typewrite(SMSHub.current_number[1:], interval=0.1)  # current_number[1:] без 7
         time.sleep(1)
         pyautogui.press("enter")
         time.sleep(random.randint(7, 14))
