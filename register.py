@@ -188,5 +188,5 @@ def main():
     else:
         print("Check 1 fail!")
 
-    time.sleep(30)
+    time.sleep(15)
     d.stop("Работа завершена!")
