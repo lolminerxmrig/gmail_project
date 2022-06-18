@@ -140,7 +140,12 @@ def main():
 
     if d.v_check("//*[contains(text(),'SMS')]", timeout=30):
         print("Check 1 success!")
-        print(SMSHub.get_number(), SMSHub.current_id, SMSHub.current_number)
+        for i in range(5):
+            if SMSHub.get_number():
+                break
+            time.sleep(1)
+        if SMSHub.current_id is None:
+            d.stop("Номер не получен. Выход...")
         pyautogui.press("tab")
         pyautogui.press("tab")
         pyautogui.press("tab")
@@ -161,6 +166,7 @@ def main():
         if SMSHub.code is None:
             print("Код так и не пришел...")
             SMSHub.set_cancel_status()
+            d.stop("Выход...")
         else:
             d.v_clear("//input[@id='phoneNumberId']")
             time.sleep(1)
